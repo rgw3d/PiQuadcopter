@@ -40,4 +40,4 @@ iface wlan0 inet static
 - To find your USB device, run `dmesg | grep ttyUSB`  and look for what number it is
   - Once you find your device, you will need to edit line 4 of `configure_port.c` within `cMultiWii` to reflect the proper device.
 - If your wireless interface is not `wlan0`, then you will have to change it in your `interfaces` file, and in `hostapd.conf`
-- Check `/etc/hostapd/hostapd.conf` for hostapd configurations, and make sure they are correct
+- Check `/etc/hostapd/hostapd.conf` for hostapd configurations, and make sure they match your `interfaces` configuration
