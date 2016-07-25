@@ -19,10 +19,10 @@ Websocket and MultiWii serial code to control a quadcopter, running on a Raspber
 
 - Download/clone this repo
 - Run `setup_pi_software.sh`, which will install `libserialport`, `isc-dhcp-server`, `hostapd`, and download `cMultiWii`, `websocketpp`. It will also compile the websocket server
+  - You need to check to see if your MultiWii is `/dev/ttyUSB0`. Check the troubleshooting section for more information
 - Since your network configuration might be different, your `/etc/network/interfaces` file is not modified, but needs to be
 - Add the following configuration to your `/etc/network/interfaces` file in order for `hostapd` to work properly
-  - Additionally, check `/etc/hostapd/hostapd.conf` for hostapd configurations, and make sure they are correct
-  - If your wireless interface is not `wlan0`, then you will have to change it in your `interfaces` file, and in `hostapd.conf`
+
 ```
 allow-hotplug wlan0
 iface wlan0 inet static
@@ -30,6 +30,14 @@ iface wlan0 inet static
   netmask 255.255.255.0
   gateway 192.168.10.1
 ```
-
+- You need to ensure `wlan0` and `hostapd.conf` are correct. check the troubleshooting seciton for more information
 - To setup the network and run the server, run `PiQuadcopter.sh`
   - The above file contains what is needed to startup the hosted network, and will run the websocket server
+
+## Troubleshooting
+
+- To find your wireless interface, run `ifconfig`
+- To find your USB device, run `dmesg | grep ttyUSB`  and look for what number it is
+  - Once you find your device, you will need to edit line 4 of `configure_port.c` within `cMultiWii` to reflect the proper device.
+- If your wireless interface is not `wlan0`, then you will have to change it in your `interfaces` file, and in `hostapd.conf`
+- Check `/etc/hostapd/hostapd.conf` for hostapd configurations, and make sure they are correct
