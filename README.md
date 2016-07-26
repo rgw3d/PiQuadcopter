@@ -47,6 +47,7 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 - To start up the hosted network and the websocket, run `sudo ./piquadcopter.sh`
 - To schedule everything to start up automatically on boot, edit `/etc/rc.local` with something like... `.//home/path/to/piquadcopter.sh`. 
   - rc.local is called automatically on startup. 
+  - Check troubleshooting for more help
 
 ## Troubleshooting
 
@@ -55,5 +56,9 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
   - Once you find your device, you will need to edit line 4 of `configure_port.c` within `cMultiWii` to reflect the proper device. You will have to recompile.
 - If your wireless interface is not `wlan0`, then you will have to change it in your `interfaces` file, and in `hostapd.conf`
 - Check `/etc/hostapd/hostapd.conf` for hostapd configurations, and make sure they match your `interfaces` configuration
+- If `hostapd` is throwing errors similar to: `n180211: Could not configure driver mode` ... then you probably need to kill the instance of hostapd already running. 
+  - Run `ps -A` to view all active processes
+  - Find the process ID number for `hostapd`
+  - `sudo kill <process ID>` will kill hostapd and hopefully resolve the issue
 - If there are any problems with `isc-dhcp-server`, try running `sudo journalctl -u isc-dhcp-server.service` to look for errors
 - If you need to recompile at any time, just run `make` at the top level of this repository
