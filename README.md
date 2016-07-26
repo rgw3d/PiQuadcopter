@@ -46,7 +46,7 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 
 - I would suggest a reboot after all of the installation process
 - To start up the hosted network and the websocket, run `sudo ./piquadcopter.sh`
-- To schedule everything to start up automatically on boot, edit `/etc/rc.local` with something like... `.//home/path/to/piquadcopter.sh`. 
+- To schedule everything to start up automatically on boot, edit `/etc/rc.local` with something like... `/home/path/to/piquadcopter.sh`. 
   - rc.local is called automatically on startup. 
   - Check troubleshooting for more help
 
