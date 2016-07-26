@@ -21,7 +21,7 @@ Websocket and MultiWii serial code to control a quadcopter, running on a Raspber
 - Run `setup_pi_software.sh`, which will install `libserialport`, `isc-dhcp-server`, `hostapd`, and download `cMultiWii`, `websocketpp`. It will also compile the websocket server
   - You need to check to see if your MultiWii is `/dev/ttyUSB0`. Check the troubleshooting section for more information
 - Since your network configuration and device might be different, your `/etc/network/interfaces`, `/etc/default/isc-dhcp-server`, and `/etc/dhcp/dhcpd.conf` files are not automatically modified.
-- Add the following configuration to your `/etc/network/interfaces` file in order for `hostapd` to work properly
+- Add the following configuration to your `/etc/network/interfaces` file in order for `hostapd` to work. Also, remove any reference to `wpa_supplicant`, as it causes issues with `hostapd`
 ```
 allow-hotplug wlan0
 iface wlan0 inet static
@@ -29,6 +29,7 @@ iface wlan0 inet static
   netmask 255.255.255.0
   gateway 192.168.10.1
 ```
+
 - Add the following configuration to your `/etc/default/isc-dhcp-server` file in order for `isc-dhcp-server` to know what device to use
 ```
 INTERFACES="wlan0"
