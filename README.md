@@ -39,7 +39,6 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
     range 192.168.10.1 192.168.10.30;
 }
 ```
-  - If there are any problems with `isc-dhcp-server`, try running `sudo journalctl -u isc-dhcp-server.service` to look for errors
 - You need to ensure `wlan0` and `hostapd.conf` are correct. check the troubleshooting seciton for more information
 
 ## Running the program and automatic startup
@@ -56,4 +55,5 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
   - Once you find your device, you will need to edit line 4 of `configure_port.c` within `cMultiWii` to reflect the proper device. You will have to recompile.
 - If your wireless interface is not `wlan0`, then you will have to change it in your `interfaces` file, and in `hostapd.conf`
 - Check `/etc/hostapd/hostapd.conf` for hostapd configurations, and make sure they match your `interfaces` configuration
+- If there are any problems with `isc-dhcp-server`, try running `sudo journalctl -u isc-dhcp-server.service` to look for errors
 - If you need to recompile at any time, just run `make` at the top level of this repository
