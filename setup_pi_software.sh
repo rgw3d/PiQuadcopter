@@ -5,8 +5,9 @@ cd setup/
 
 
 #General settings
-sudo apt-get -y update
-sudo apt-get -y libtool
+sudo apt-get -y install update
+sudo apt-get -y install libtool
+sudo apt-get -y install autoconf
 
 
 #Wi-Fi network hosting 
