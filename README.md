@@ -20,9 +20,8 @@ Websocket and MultiWii serial code to control a quadcopter, running on a Raspber
 - Download/clone this repo
 - Run `setup_pi_software.sh`, which will install `libserialport`, `isc-dhcp-server`, `hostapd`, and download `cMultiWii`, `websocketpp`. It will also compile the websocket server
   - You need to check to see if your MultiWii is `/dev/ttyUSB0`. Check the troubleshooting section for more information
-- Since your network configuration might be different, your `/etc/network/interfaces` file is not modified, but needs to be
+- Since your network configuration and device might be different, your `/etc/network/interfaces`, `/etc/default/isc-dhcp-server`, and `/etc/dhcp/dhcpd.conf` files are not automatically modified.
 - Add the following configuration to your `/etc/network/interfaces` file in order for `hostapd` to work properly
-
 ```
 allow-hotplug wlan0
 iface wlan0 inet static
@@ -30,9 +29,25 @@ iface wlan0 inet static
   netmask 255.255.255.0
   gateway 192.168.10.1
 ```
+- Add the following configuration to your `/etc/default/isc-dhcp-server` file in order for `isc-dhcp-server` to know what device to use
+```
+INTERFACES="wlan0"
+```
+- Add the following configuration to your `/etc/dhcp/dhcpd.conf` file in order for `isc-dhcp-server` to know what subnet to use
+```
+subnet 192.168.10.0 netmask 255.255.255.0 {
+    range 192.168.10.1 192.168.10.30;
+}
+```
+  - If there are any problems with `isc-dhcp-server`, try running `sudo journalctl -u isc-dhcp-server.service` to look for errors
 - You need to ensure `wlan0` and `hostapd.conf` are correct. check the troubleshooting seciton for more information
-- To setup the network and run the server, run `PiQuadcopter.sh`
-  - The above file contains what is needed to startup the hosted network, and will run the websocket server
+
+## Running the program and automatic startup
+
+- I would suggest a reboot after all of the installation process
+- To start up the hosted network and the websocket, run `sudo ./piquadcopter.sh`
+- To schedule everything to start up automatically on boot, edit `/etc/rc.local` with something like... `.//home/path/to/piquadcopter.sh`. 
+  - rc.local is called automatically on startup. 
 
 ## Troubleshooting
 
