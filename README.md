@@ -1,6 +1,8 @@
 # PiQuadcopter
 Websocket and MultiWii serial code to control a quadcopter, running on a Raspberry Pi
 
+**Note: All development and testing was done on a RaspberryPi 2 B+, in 2016. So be warned, things might not work exactly the same now. **
+
 ## Overview of all the tech
 
 - The first thing to do is to create a hosted Wi-Fi network. To accomplish this we use [`isc-dhcp-server`](https://help.ubuntu.com/community/isc-dhcp-server) and [`hostapd`](https://w1.fi/hostapd/)
@@ -45,8 +47,8 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 ## Running the program and automatic startup
 
 - I would suggest a reboot after all of the installation process
-- To start up the hosted network and the websocket, run `sudo ./piquadcopter.sh`
-- To schedule everything to start up automatically on boot, edit `/etc/rc.local` with something like... `/home/path/to/piquadcopter.sh`. 
+- To start up the hosted network and the websocket, run `sudo ./piquadserver.sh`
+- To schedule everything to start up automatically on boot, edit `/etc/rc.local` with something like... `/home/path/to/piquadserver.sh`. 
   - rc.local is called automatically on startup. 
   - Check troubleshooting for more help
 
